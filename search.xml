@@ -15,6 +15,25 @@
     </entry>
     
     
+    
+    <entry>
+      <title>第18届全国大学生软件创新大赛-软件系统安全攻防赛</title>
+      <link href="/2025/01/08/%E7%AC%AC18%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E8%BD%AF%E4%BB%B6%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9B/"/>
+      <url>/2025/01/08/%E7%AC%AC18%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E8%BD%AF%E4%BB%B6%E5%88%9B%E6%96%B0%E5%A4%A7%E8%B5%9B-%E8%BD%AF%E4%BB%B6%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2%E8%B5%9B/</url>
+      
+        <content type="html"><![CDATA[<h2 id="钓鱼邮件"><a href="#钓鱼邮件" class="headerlink" title="钓鱼邮件"></a>钓鱼邮件</h2><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105007687.png" alt="image-20250108104959509"></p><p>给了一个<code>.eml</code>文件，outlook打开，有一个<code>生日快乐.zip</code>，解压需要密码，根据发件日期，24岁等信息，可以猜测出解压密码即为生日<code>20001111</code></p><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105828364.png" alt="image-20250108105825686"></p><p>解压后得到<code>生日快乐.exe</code>，双击运行，wirshark抓包，找到<code>ip</code>和<code>port</code></p><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108112127493.png" alt="image-20250108112125065"></p><p>md5结果</p><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105736525.png" alt="image-20250108105733328"></p><hr><h2 id="donntyousee"><a href="#donntyousee" class="headerlink" title="donntyousee"></a>donntyousee</h2><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108111410073.png" alt="image-20250108111407864"></p><p>查看函数<code>sub_405559()</code><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105024269.png" alt="image-2025010523513"></p><p>存在花指令</p><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105025997.png" alt="image-20250105235332137"></p><p>将<code>ret</code>nop掉<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105028314.png" alt="image-20250105235413571"></p><p>动调跑一下，这里一定要在函数<code>sub_405559()</code>里面下断，不然单步会直接跳过该函数，直接跟丢了<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105040252.png" alt="image-20250106084309582"></p><p>多次尝试发现这个<code>call</code>是进行输入的地方，这里直接进行输入然后步过<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105047790.png" alt="image-20250106084149036"></p><p>这两个call步入<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105044020.png" alt="image-20250106084612297"></p><p>第一个<code>call</code>，发现是rc4初始化<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105056578.png" alt="image-20250106084742808"></p><p>第二个<code>call</code>是魔改的RC4，最后加了个亦或<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105107826.png" alt="image-20250106085025637"></p><p>跟一下加密后的结果，找到存储密文的地址<code>unk_5C6CC0</code><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105103643.png" alt="image-20250106085636258"></p><p>然后去看密文在哪里进行<code>check</code>，这里交叉引用</p><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105122937.png" alt="image-20250106090636357"></p><p>定位到函数<code>sub_4054FB</code>，这个call步入<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105125496.png" alt="image-20250106090845227"></p><p>发现密文<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105142200.png" alt="image-20250106091036465"></p><p>秘钥key</p><blockquote><p>这里做了反调试，导致key动态和静态的值不一样</p></blockquote><p><img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105155711.png" alt="image-20250106090243481"></p><p>将密文和<code>key</code>dump出来，用工具解密即可<img src="https://cdn.jsdelivr.net/gh/warmlight19/photos@master/20250108105201079.png" alt="image-20250106091124095"></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> write up </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
   
   
 </search>
