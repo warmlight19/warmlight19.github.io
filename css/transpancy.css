@@ -1,20 +1,28 @@
+/* 明亮模式背景色 */
+:root {
+  --trans-light: rgba(255, 255, 255, .7);
+  --trans-light-2: rgba(255, 255, 255, .5);
+  --card-bg: rgba(255, 255, 255, .5);
+}
+
+/* 黑暗模式背景色 */
+[data-theme="dark"] {
+  --trans-light: rgba(25, 25, 25, .7);
+  --trans-light-2: rgba(25, 25, 25, .5);
+  --card-bg: rgba(25, 25, 25, .5);
+}
+
 /* 文章页背景 */
 .layout_post>#post {
-    /* 以下代表透明度为0.7 可以自行修改*/
-    background: rgba(255,255,255,.7);
+    background: var(--trans-light);
 }
  
 /* 所有页面背景 */
 #aside_content .card-widget, #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout_post>#page, .layout_post>#post, .read-mode .layout_post>#post{
-    /* 以下代表透明度为0.7 */
-    background: rgba(255,255,255,.5);
+    background: var(--trans-light-2);
 }
-/*侧边卡片的透明度 */
-:root {
-  --card-bg: rgba(255, 255, 255, .5);
-}
+
 /* 页脚透明 */
 #footer {
-	/* 以下代表透明度为0.7 */
-	background: rgba(255,255,255, .7);
+	background: var(--trans-light);
 }
